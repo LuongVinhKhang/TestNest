@@ -1,0 +1,26 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Dependency directories
+.pnpm/
+dist/
+build/
+
+# Environment files
+.env
+.env.*
+
+# Husky
+.husky/_
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
