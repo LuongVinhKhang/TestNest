@@ -1,2 +1,18 @@
 ###
-GET http://localhost:3001/cart/health
+POST https://dev-hac6cslcusewuy3f.us.auth0.com/oauth/token
+Content-Type: application/json
+
+{
+  "client_id": "DyOW5roUTbUEsp70geYzlamSJ6DSlIj0",
+  "client_secret": "CN_kO7pcUcItS-XLveJmp3ZiN-CmPp-RSRYK9enLT31d6QOIpU48T1WD7ZSBt7tW",
+  "audience": "testnest",
+  "grant_type": "client_credentials"
+}
+
+###
+GET http://localhost:3001/api/cart/
+Authorization: Bearer {{access_token}}
+
+###
+GET http://localhost:3001/authorized
+Authorization: Bearer {{access_token}}

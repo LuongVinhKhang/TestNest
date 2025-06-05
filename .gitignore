@@ -24,3 +24,6 @@ build/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Leet-code-temp-test
+leet-code/
