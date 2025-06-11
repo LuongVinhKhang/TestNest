@@ -19,6 +19,13 @@ const jwtCheck = auth({
   tokenSigningAlg: 'RS256',
 });
 
+// Extend Express Request type to include userId using module augmentation
+declare module 'express' {
+  export interface Request {
+    userId?: string;
+  }
+}
+
 // init middleware
 app.use(cors(corsOptions));
 app.use(logger);
@@ -56,8 +63,6 @@ app.get('/authorized', (req, res) => {
 app.use(notFoundHandler);
 
 // Error handling middleware (must be last!)
-import type { ErrorRequestHandler } from 'express';
-
-app.use(errorHandler as ErrorRequestHandler);
+app.use(errorHandler);
 
 export default app;
