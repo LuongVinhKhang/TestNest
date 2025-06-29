@@ -1,0 +1,43 @@
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/next@15.2.4_@babel+core@7.27.4_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/.pnpm/next@15.2.4_@babel+core@7.27.4_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/globals.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  white-space: pre-wrap; 
+  word-break: break-all; 
+}
+
+p code {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+#__next {
+  height: 100%;
+}
+
+#nav-mobile {
+  min-height: 170px;
+}
+
+.nav-item.dropdown .dropdown-item {
+  padding: 0;
+}
+
+.nav-item.dropdown .dropdown-item a {
+  color: inherit;
+}
+
+.nav-item.dropdown .dropdown-item .navbar-item {
+  width: 100%;
+  padding: .55rem 1.5rem;
+}
+
+.result-block-container .result-block {
+  opacity: 1;
+}
+
