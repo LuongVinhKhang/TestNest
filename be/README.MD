@@ -2,12 +2,11 @@
 
 > Run all commands from the `/be` folder.
 
+## Install
 pnpm install
 
-
-
+## Add new packages
 pnpm --filter cart-service add  http-errors
-
 pnpm --filter cart-service add -D @types/http-errors
 
 # Start all services in development mode (with nodemon)

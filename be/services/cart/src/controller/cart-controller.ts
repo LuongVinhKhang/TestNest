@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import CartService from '@cartComponent/services/cart-service';
+import CartService from '@cartComponent/service/cart-service';
 
 class CartController {
   /**

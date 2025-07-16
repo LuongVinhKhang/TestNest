@@ -1,6 +1,6 @@
 import express, { Request } from 'express';
 import cookieParser from 'cookie-parser';
-import cartRoute from './routes/cart-route';
+import cartRoute from './route/cart-route';
 import logger from '@sharedMiddleware/logger.middleware';
 import { auth } from 'express-oauth2-jwt-bearer';
 import { config } from 'dotenv';
