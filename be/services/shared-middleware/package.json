@@ -1,0 +1,9 @@
+{
+  "name": "shared-middleware",
+  "version": "1.0.0",
+  "main": "logger.middleware.ts",
+  "type": "module",
+  "dependencies": {
+    "morgan": "^1.10.0"
+  }
+}

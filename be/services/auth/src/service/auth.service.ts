@@ -21,6 +21,7 @@ export class AuthService {
       userId: user.id,
       token: jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '7d' }),
       revoked: false,
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
     });
     return { accessToken, refreshToken: refreshToken.token };
   }

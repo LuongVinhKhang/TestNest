@@ -2,7 +2,7 @@
   "name": "be",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"pnpm --filter cart-service dev\"",
+    "dev": "concurrently \"pnpm --filter auth-service dev\" \"pnpm --filter cart-service dev\" ",
     "lint": "eslint . --ext .ts --fix",
     "format": "prettier --write \"**/*.{ts,js,json,md}\"",
     "check-format": "prettier --check \"**/*.{ts,js,json,md}\""
