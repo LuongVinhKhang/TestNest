@@ -27,7 +27,7 @@ export class AuthMiddleware {
       }
 
       const token = authHeader.split(' ')[1];
-      const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
+      const decoded = jwt.verify(token, process.env.JWT_SECRET!) as unknown;
 
       // Check if token is for client credentials (not user token)
       if (!decoded.client_id) {
@@ -45,7 +45,7 @@ export class AuthMiddleware {
       };
 
       next();
-    } catch (error) {
+    } catch {
       return res.status(401).json({
         error: 'invalid_token',
         message: 'Invalid or expired token',

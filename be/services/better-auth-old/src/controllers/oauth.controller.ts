@@ -72,8 +72,7 @@ export class OAuthController {
         expires_in: 3600, // 1 hour
         scope: scope || client.scopes.join(' '),
       });
-    } catch (error) {
-      console.error('OAuth token error:', error);
+    } catch {
       res.status(500).json({
         error: 'server_error',
         error_description: 'Internal server error',
@@ -93,7 +92,7 @@ export class OAuthController {
       }
 
       const token = authHeader.split(' ')[1];
-      const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
+      const decoded = jwt.verify(token, process.env.JWT_SECRET!) as unknown;
 
       res.json({
         valid: true,
@@ -102,7 +101,7 @@ export class OAuthController {
         scope: decoded.scope,
         exp: decoded.exp,
       });
-    } catch (error) {
+    } catch {
       res.status(401).json({
         error: 'invalid_token',
         error_description: 'Invalid or expired token',
@@ -128,7 +127,7 @@ export class OAuthController {
         client_name: client.name,
         scopes: client.scopes,
       });
-    } catch (error) {
+    } catch {
       res.status(500).json({
         error: 'server_error',
         error_description: 'Internal server error',
