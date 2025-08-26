@@ -1,2 +1,0 @@
-pnpm --filter ./be format
-pnpm --filter ./be lint
