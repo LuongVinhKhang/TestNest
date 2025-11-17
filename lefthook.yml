@@ -1,11 +1,11 @@
 pre-commit:
   parallel: true
-  jobs:
-    - name: be:format
-      run: pnpm --filter be format
-    - name: be:lint
+  commands:
+    lint:
       run: pnpm --filter be lint
 
+    format:
+      run: pnpm --filter be format
 #
 # pre-push:
 #   jobs:
