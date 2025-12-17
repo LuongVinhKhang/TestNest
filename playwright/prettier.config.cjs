@@ -7,13 +7,14 @@ module.exports = {
   tabWidth: 2, // common JS/TS convention
   useTabs: false,
   semi: true, // keeps statements explicit (common in TS projects)
-  singleQuote: true, // popular in TS/JS projects
-  trailingComma: "all", // makes diffs cleaner and plays well with multiline objects/params
+  singleQuote: false, // use double quotes across JS/TS
+  jsxSingleQuote: false, // use double quotes in JSX attributes
+  trailingComma: 'all', // makes diffs cleaner and plays well with multiline objects/params
   bracketSpacing: true,
   bracketSameLine: false, // JSX / TSX: newlines for elements are clearer
-  arrowParens: "avoid", // avoid parentheses where possible for terser arrow functions
-  endOfLine: "lf", // consistent across platforms; adjust if your team needs CRLF
-  proseWrap: "preserve", // don't force rewrap on markdown
+  arrowParens: 'avoid', // avoid parentheses where possible for terser arrow functions
+  endOfLine: 'lf', // consistent across platforms; adjust if your team needs CRLF
+  proseWrap: 'preserve', // don't force rewrap on markdown
   requirePragma: false, // format everything unless asked otherwise
   plugins: [], // keep empty unless you intentionally add plugins
 };

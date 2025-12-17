@@ -1,0 +1,47 @@
+# Local environment
+@LOCAL_HOST=http://localhost:3001
+
+# Staging environment
+@STAGING_HOST=https://staging.api.myapp.com
+
+# Production environment
+@PROD_HOST=https://api.myapp.com
+
+# @host = {{LOCAL_HOST}}
+# @host = {{STAGING_HOST}}
+# @host = {{PROD_HOST}}
+@host = {{LOCAL_HOST}}
+
+### Register a new user
+POST {{host}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "password123"
+}
+
+### Login with the user
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "password123"
+}
+
+### Refresh token (replace <refresh_token> with actual token from login response)
+POST {{host}}/auth/refresh-token
+Content-Type: application/json
+
+{
+  "token": "<refresh_token>"
+}
+
+### Logout (replace <refresh_token> with actual token)
+POST {{host}}/auth/logout
+Content-Type: application/json
+
+{
+  "token": "<refresh_token>"
+}

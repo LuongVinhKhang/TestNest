@@ -1,0 +1,55 @@
+# Local environment
+@LOCAL_CART_HOST=http://localhost:3001
+
+# Staging environment
+@STAGING_CART_HOST=https://staging.api.myapp.com
+
+# Production environment
+@PROD_CART_HOST=https://api.myapp.com
+
+# @cart_host = {{LOCAL_CART_HOST}}
+# @cart_host = {{STAGING_CART_HOST}}
+# @cart_host = {{PROD_CART_HOST}}
+@cart_host = {{LOCAL_CART_HOST}}
+
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1NDY4MDQ2OCwiZXhwIjoxNzU0NjgxMzY4fQ.oPCj4GO2IPmZ3CxDGWPHhFKRGiz1J2NQ9fEsV1dr7uA
+
+### Get the cart for the authenticated user
+GET {{cart_host}}/api/cart
+Authorization: Bearer {{access_token}}
+
+### Create a new cart for the authenticated user
+POST {{cart_host}}/api/cart
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "items": [
+    {
+      "productId": 1,
+      "quantity": 2
+    },
+    {
+      "productId": 2,
+      "quantity": 1
+    }
+  ]
+}
+
+### Update the cart for the authenticated user
+PUT {{cart_host}}/api/cart
+Content-Type: application/json
+Authorization: Bearer <access_token>
+
+{
+  "items": [
+    {
+      "productId": 1,
+      "quantity": 3
+    }
+  ]
+}
+
+### Delete the cart for the authenticated user
+DELETE {{cart_host}}/api/cart
+Authorization: Bearer <access_token>

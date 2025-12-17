@@ -49,9 +49,7 @@ export class HomePage extends BasePage {
     await this.clickSearchButton();
   }
 
-  async getProductData(): Promise<
-    { name: string; price: number; co2Rating: string }[]
-  > {
+  async getProductData(): Promise<{ name: string; price: number; co2Rating: string }[]> {
     await this.elements.productItems().first().waitFor({ state: "visible" });
     const productsCount = await this.elements.productItems().count();
     const products = [];
@@ -87,9 +85,7 @@ export class HomePage extends BasePage {
 
   async getCurrentPageNumber(): Promise<number> {
     // Assumes the current page button is disabled or has aria-current
-    const current = await this.page
-      .getByRole("button", { selected: true })
-      .innerText();
+    const current = await this.page.getByRole("button", { selected: true }).innerText();
     return parseInt(current, 10);
   }
 
@@ -97,9 +93,7 @@ export class HomePage extends BasePage {
     const texts = await this.page
       .locator('a[role="button"][aria-label^="Page-"]')
       .allTextContents();
-    const numbers = texts
-      .map((text) => parseInt(text, 10))
-      .filter((num) => !isNaN(num));
+    const numbers = texts.map(text => parseInt(text, 10)).filter(num => !isNaN(num));
     return numbers;
   }
 }

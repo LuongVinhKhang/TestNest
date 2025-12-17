@@ -1,0 +1,33 @@
+### Register a new user
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "password123"
+}
+
+### Login with the user
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "password123"
+}
+
+### Refresh token (replace <refresh_token> with actual token from login response)
+POST http://localhost:3000/auth/refresh-token
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1MzQ1Mjg1MywiZXhwIjoxNzU0MDU3NjUzfQ.C7dH9fjxr9saH9Cw01GaPKuenMwHR5Lp4L-EyuYM6Fc"
+}
+
+### Logout (replace <refresh_token> with actual token)
+POST http://localhost:3000/auth/logout
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1MzQ1MDI4OCwiZXhwIjoxNzU0MDU1MDg4fQ.fFcc-KabuXwXNip4MiyOBiOq73sT6RpCFa9ISrrjz_s"
+}
