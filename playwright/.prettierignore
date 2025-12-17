@@ -1,0 +1,20 @@
+# Node / build
+node_modules
+dist
+build
+.out
+coverage
+
+# Playwright artifacts
+test-results
+playwright-report
+playwright-report.zip
+
+# Lock files and env
+*.log
+.env
+.DS_Store
+
+# Optional editor / misc
+.vscode/
+.idea/

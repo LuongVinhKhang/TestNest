@@ -1,25 +1,32 @@
 // eslint.config.mjs
-import eslint from '@eslint/js';
-import { defineConfig } from 'eslint/config';
-import tseslint from 'typescript-eslint';
-import playwright from 'eslint-plugin-playwright';
-import globals from 'globals';
+import eslint from "@eslint/js";
+import { defineConfig } from "eslint/config";
+import tseslint from "typescript-eslint";
+import playwright from "eslint-plugin-playwright";
+import globals from "globals";
+import importPlugin from "eslint-plugin-import";
+import eslintConfigPrettier from "eslint-config-prettier";
 
 export default defineConfig(
-  // Base JS rules
+  //
+  // 1) Base JS
+  //
   eslint.configs.recommended,
 
-  // TypeScript rules (incl. type-aware rules)
-  tseslint.configs.recommended,
-  tseslint.configs.recommendedTypeChecked,
+  //
+  // 2) TypeScript (including type-aware rules)
+  //
+  ...tseslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
 
-  // Project-wide language options (TS project service, globals)
+  //
+  // 3) Default project-wide rules for TS files
+  //
   {
-    files: ['core/**/*.ts', 'pom/**/*.ts', 'test/**/*.ts'],
+    files: ["core/**/*.ts", "pom/**/*.ts", "test/**/*.ts"],
     languageOptions: {
       parserOptions: {
-        // Let typescript-eslint auto-detect the right tsconfig per file
-        // (recommended in 2025)  [oai_citation:0‡typescript-eslint.io](https://typescript-eslint.io/getting-started/typed-linting/)
+        // Auto-detect tsconfig through TypeScript Project Service
         projectService: true,
       },
       globals: {
@@ -27,11 +34,33 @@ export default defineConfig(
         ...globals.browser,
       },
     },
+    plugins: {
+      import: importPlugin,
+    },
+    rules: {
+      // Import rules
+      "import/no-unresolved": "error",
+      "import/order": ["error", { "newlines-between": "always" }],
+
+      // General project rules
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_" },
+      ],
+      "no-console": "warn",
+    },
   },
 
-  // Playwright rules only for test files
+  //
+  // 4) Playwright only for test files
+  //
   {
-    ...playwright.configs['flat/recommended'], // official flat config preset  [oai_citation:1‡UNPKG](https://app.unpkg.com/eslint-plugin-playwright%401.2.0/files/README.md?utm_source=chatgpt.com)
-    files: ['test/**/*.ts'],
+    ...playwright.configs["flat/recommended"],
+    files: ["test/**/*.ts"],
   },
+
+  //
+  // 5) Prettier compatibility (turns off ESLint formatting rules)
+  //
+  eslintConfigPrettier
 );

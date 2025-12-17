@@ -1,0 +1,233 @@
+{
+  "config": {
+    "configFile": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/playwright.config.ts",
+    "rootDir": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "toolshop-simple",
+        "name": "toolshop-simple",
+        "testDir": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/tests/tool-shop/test/simple",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "3way",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "tool-shop/test/multiple-tabs.spec.ts",
+      "file": "tool-shop/test/multiple-tabs.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Tool Shop Home Page",
+          "file": "tool-shop/test/multiple-tabs.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "open multiple tabs",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30124,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/pages/toolshop/page.home.ts",
+                            "column": 62,
+                            "line": 62
+                          },
+                          "message": "Error: locator.innerText: Target page, context or browser has been closed\n\n\u001b[90m   at \u001b[39m../pages/toolshop/page.home.ts:62\n\n\u001b[0m \u001b[90m 60 |\u001b[39m       console\u001b[33m.\u001b[39mlog(\u001b[32m`Fetching data for product ${i + 1}/${productsCount}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 61 |\u001b[39m       \u001b[36mconst\u001b[39m product \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39melements\u001b[33m.\u001b[39mproductItems()\u001b[33m.\u001b[39mnth(i)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 62 |\u001b[39m       \u001b[36mconst\u001b[39m name \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m product\u001b[33m.\u001b[39mgetByTestId(\u001b[32m\"product-name\"\u001b[39m)\u001b[33m.\u001b[39minnerText()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 63 |\u001b[39m       \u001b[36mconst\u001b[39m priceText \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m product\u001b[33m.\u001b[39mgetByTestId(\u001b[32m\"product-price\"\u001b[39m)\u001b[33m.\u001b[39minnerText()\u001b[33m;\u001b[39m\n \u001b[90m 64 |\u001b[39m       \u001b[36mconst\u001b[39m co2Rating \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m product\n \u001b[90m 65 |\u001b[39m         \u001b[33m.\u001b[39mgetByTestId(\u001b[32m\"co2-rating-badge\"\u001b[39m)\u001b[0m\n\u001b[2m    at HomePage.getProductData (/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/pages/toolshop/page.home.ts:62:62)\u001b[22m\n\u001b[2m    at /Users/khangluong/Documents/Khang/Learn/TestNest/playwright/tests/tool-shop/test/multiple-tabs.spec.ts:19:22\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Fetching data for product 1/9\n"
+                        },
+                        {
+                          "text": "Fetching data for product 2/9\n"
+                        },
+                        {
+                          "text": "Fetching data for product 3/9\n"
+                        },
+                        {
+                          "text": "Fetching data for product 4/9\n"
+                        },
+                        {
+                          "text": "Fetching data for product 5/9\n"
+                        },
+                        {
+                          "text": "Fetching data for product 6/9\n"
+                        },
+                        {
+                          "text": "Fetching data for product 7/9\n"
+                        },
+                        {
+                          "text": "Fetching data for product 8/9\n"
+                        },
+                        {
+                          "text": "Fetching data for product 9/9\n"
+                        },
+                        {
+                          "text": "Products found: [\n  { name: \u001b[32m'Combination Pliers'\u001b[39m, price: \u001b[33m14.13\u001b[39m, co2Rating: \u001b[32m'D'\u001b[39m },\n  { name: \u001b[32m'Pliers'\u001b[39m, price: \u001b[33m12.01\u001b[39m, co2Rating: \u001b[32m'D'\u001b[39m },\n  { name: \u001b[32m'Bolt Cutters'\u001b[39m, price: \u001b[33m48.41\u001b[39m, co2Rating: \u001b[32m'D'\u001b[39m },\n  { name: \u001b[32m'Long Nose Pliers'\u001b[39m, price: \u001b[33m14.24\u001b[39m, co2Rating: \u001b[32m'D'\u001b[39m },\n  { name: \u001b[32m'Slip Joint Pliers'\u001b[39m, price: \u001b[33m9.17\u001b[39m, co2Rating: \u001b[32m'D'\u001b[39m },\n  {\n    name: \u001b[32m'Claw Hammer with Shock Reduction Grip'\u001b[39m,\n    price: \u001b[33m13.41\u001b[39m,\n    co2Rating: \u001b[32m'D'\u001b[39m\n  },\n  { name: \u001b[32m'Hammer'\u001b[39m, price: \u001b[33m12.58\u001b[39m, co2Rating: \u001b[32m'D'\u001b[39m },\n  { name: \u001b[32m'Claw Hammer'\u001b[39m, price: \u001b[33m11.48\u001b[39m, co2Rating: \u001b[32m'D'\u001b[39m },\n  { name: \u001b[32m'Thor Hammer'\u001b[39m, price: \u001b[33m11.14\u001b[39m, co2Rating: \u001b[32m'D'\u001b[39m }\n]\n"
+                        },
+                        {
+                          "text": "Fetching data for product 1/9\n"
+                        },
+                        {
+                          "text": "Fetching data for product 2/9\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-13T14:08:28.434Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/test-results/tool-shop-test-multiple-ta-f8826-ome-Page-open-multiple-tabs-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/khangluong/Documents/Khang/Learn/TestNest/playwright/test-results/tool-shop-test-multiple-ta-f8826-ome-Page-open-multiple-tabs-chromium/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b48bd6cf4c7c81ea4537-c9e1dc5f8aab07fdd5dd",
+              "file": "tool-shop/test/multiple-tabs.spec.ts",
+              "line": 8,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-12-13T14:08:27.771Z",
+    "duration": 30851.946000000462,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
