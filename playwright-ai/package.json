@@ -1,0 +1,28 @@
+{
+  "name": "playwright-ai",
+  "version": "1.0.0",
+  "description": "Playwright + TypeScript automation suite for practicesoftwaretesting.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "lint": "eslint . --ext .ts,.js",
+    "format": "prettier --write .",
+    "sonar": "sonar-scanner"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-node": "latest",
+    "eslint-plugin-playwright": "latest",
+    "prettier": "latest",
+    "sonar-scanner": "latest",
+    "typescript": "latest"
+  },
+  "dependencies": {
+    "googleapis": "^166.0.0"
+  }
+}
