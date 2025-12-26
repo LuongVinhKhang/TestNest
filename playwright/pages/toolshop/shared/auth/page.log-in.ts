@@ -1,4 +1,4 @@
-import { BasePage } from "./page.base";
+import { BasePage } from "../page.base";
 
 export class LogInPage extends BasePage {
   get elements() {
@@ -7,6 +7,7 @@ export class LogInPage extends BasePage {
       emailTextBox: () => this.page.getByTestId("email"),
       passwordTextBox: () => this.page.getByTestId("password"),
       logInButton: () => this.page.getByTestId("login-submit"),
+      loginErrorLabel: () => this.page.getByTestId("login-error"),
     };
   }
 

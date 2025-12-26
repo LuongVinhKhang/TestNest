@@ -1,4 +1,4 @@
-import { BasePage } from "./page.base";
+import { BasePage } from "../page.base";
 
 export class HeaderSection extends BasePage {
   get elements() {
@@ -7,12 +7,14 @@ export class HeaderSection extends BasePage {
       homeLink: () => this.page.getByTestId("nav-home"),
       categoriesLink: () => this.page.getByTestId("nav-categories"),
       categoriesHandToolsLink: () => this.page.getByTestId("nav-hand-tools"),
-      categoriesPowerToolsSubLink: () =>
-        this.page.getByTestId("nav-power-tools"),
+      categoriesPowerToolsSubLink: () => this.page.getByTestId("nav-power-tools"),
       categoriesOtherSubLink: () => this.page.getByTestId("nav-other"),
-      categoriesSpecialToolsSubLink: () =>
-        this.page.getByTestId("nav-special-tools"),
+      categoriesSpecialToolsSubLink: () => this.page.getByTestId("nav-special-tools"),
       categoriesRentalsLink: () => this.page.getByTestId("nav-rentals"),
+      contactLink: () => this.page.getByTestId("nav-contact"),
+      menuButton: () => this.page.getByTestId("nav-menu"),
+      menuProductsSubLink: () => this.page.getByTestId("nav-admin-products"),
+      menuUsersSubLink: () => this.page.getByTestId("nav-admin-users"),
       signInLink: () => this.page.getByTestId("nav-sign-in"),
     };
   }
@@ -44,6 +46,20 @@ export class HeaderSection extends BasePage {
   async selectRentalsCategory() {
     await this.elements.categoriesLink().hover();
     await this.elements.categoriesRentalsLink().click();
+  }
+
+  async clickContactLink() {
+    await this.elements.contactLink().click();
+  }
+
+  async selectMenuProducts() {
+    await this.elements.menuButton().click();
+    await this.elements.menuProductsSubLink().click();
+  }
+
+  async selectMenuUsers() {
+    await this.elements.menuButton().click();
+    await this.elements.menuUsersSubLink().click();
   }
 
   async clickSignInLink() {

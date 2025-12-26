@@ -1,16 +1,16 @@
 import { test, expect } from "@playwright/test";
-import { HomePage } from "pages/toolshop/page.home";
+import { ShopHomePage } from "pages/toolshop/shop/page.shop-home";
 
-test.describe("Tool Shop Home Page", () => {
-  let homePage: HomePage;
+test.describe("Shop Home Page sorting and filtering", () => {
+  let shopHomePage: ShopHomePage;
 
   test.beforeEach(async ({ page }) => {
-    homePage = new HomePage(page);
-    await homePage.goto();
+    shopHomePage = new ShopHomePage(page);
+    await shopHomePage.goto();
   });
 
-  test("should have correct sort options", async () => {
-    const sortOptions = await homePage.getAvailableSortOptions();
+  test("should display all expected sort options in the sort dropdown", async () => {
+    const sortOptions = await shopHomePage.getAvailableSortOptions();
     expect(sortOptions).toEqual(
       expect.arrayContaining([
         "Name (A - Z)",
@@ -23,22 +23,21 @@ test.describe("Tool Shop Home Page", () => {
     );
   });
 
-  test("should sort products by name ascending", async () => {
-    await homePage.selectSortingBy("name,asc");
+  test("should sort products by name in ascending order across all pages", async () => {
+    await shopHomePage.selectSortingBy("name,asc");
     // Get total pages
-    const pages = await homePage.getPaginationNumbers();
+    const pages = await shopHomePage.getPaginationNumbers();
     console.log("Total pages:", pages);
     const first = pages[0];
     const last = pages[pages.length - 1];
-    const middle =
-      pages.length > 2 ? pages[Math.floor(pages.length / 2)] : null;
+    const middle = pages.length > 2 ? pages[Math.floor(pages.length / 2)] : null;
 
     // Helper to check sorting on a page
     const checkSorted = async (pageNum: number) => {
-      await homePage.goToPage(pageNum);
+      await shopHomePage.goToPage(pageNum);
       await expect
         .poll(async () => {
-          const names = (await homePage.getProductData()).map((p) => p.name);
+          const names = (await shopHomePage.getProductData()).map(p => p.name);
           const sorted = [...names].sort((a, b) => a.localeCompare(b));
           return JSON.stringify(names) === JSON.stringify(sorted);
         })
@@ -48,10 +47,5 @@ test.describe("Tool Shop Home Page", () => {
     await checkSorted(first);
     if (middle) await checkSorted(middle);
     await checkSorted(last);
-  });
-
-  test("2 tabs to check the products on page 1", async () => {
-    await homePage.goto();
-    console.log("Products found:", await homePage.getProductData());
   });
 });

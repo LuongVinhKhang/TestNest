@@ -1,4 +1,3 @@
-// eslint.config.mjs
 import eslint from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
@@ -8,59 +7,70 @@ import importPlugin from "eslint-plugin-import";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default defineConfig(
-  //
-  // 1) Base JS
-  //
+  // TypeScript and JS base
   eslint.configs.recommended,
-
-  //
-  // 2) TypeScript (including type-aware rules)
-  //
   ...tseslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
-
-  //
-  // 3) Default project-wide rules for TS files
-  //
+  // Project-wide rules
   {
-    files: ["core/**/*.ts", "pom/**/*.ts", "test/**/*.ts"],
+    files: ["**/*.{js,cjs,ts,tsx}"],
     languageOptions: {
-      parserOptions: {
-        // Auto-detect tsconfig through TypeScript Project Service
-        projectService: true,
-      },
+      parser: tseslint.parser,
+      parserOptions: { project: "./tsconfig.json" },
       globals: {
         ...globals.node,
         ...globals.browser,
       },
     },
-    plugins: {
-      import: importPlugin,
-    },
+    plugins: { import: importPlugin },
     rules: {
-      // Import rules
       "import/no-unresolved": "error",
       "import/order": ["error", { "newlines-between": "always" }],
-
-      // General project rules
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        { argsIgnorePattern: "^_" },
-      ],
+      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
       "no-console": "warn",
     },
   },
-
-  //
-  // 4) Playwright only for test files
-  //
+  // Playwright rules for all test files
+  playwright.configs["flat/all"],
+  // Prettier compatibility
+  eslintConfigPrettier,
+  // Custom rules and ignores
   {
-    ...playwright.configs["flat/recommended"],
-    files: ["test/**/*.ts"],
-  },
+    rules: {
+      // ...your custom rules here...
+      "playwright/no-useless-not": "error",
 
-  //
-  // 5) Prettier compatibility (turns off ESLint formatting rules)
-  //
-  eslintConfigPrettier
+      "no-unused-vars": "off", // use @typescript-eslint/no-unused-vars (below) instead
+      "no-param-reassign": ["error", { props: false }],
+      "max-classes-per-file": ["error", 1], // single responsibility principle
+      "no-use-before-define": "off",
+      "no-useless-call": "error",
+      "no-useless-escape": "error", // prevent unnecessary code
+      "no-useless-rename": "error", // prevent unnecessary code
+      "no-useless-return": "error",
+      "prefer-spread": "error", // convention, brevity
+      "prefer-template": "error", // convention, readability
+      yoda: "error",
+      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-floating-promises": "error",
+      "playwright/valid-title": "off",
+      "playwright/no-skipped-test": [
+        "off",
+        {
+          allowConditional: true,
+        },
+      ],
+      "playwright/no-page-pause": "error", // avoid accidental pauses
+      "playwright/no-nested-step": "off", // to reflect test structure
+      "playwright/no-wait-for-timeout": "error", // encourage better waiting strategies
+    },
+    ignores: [
+      "node_modules/",
+      "package-lock.json",
+      "pnpm-lock.yaml",
+      "eslint.config.mjs",
+      "playwright-report/",
+    ],
+  },
 );

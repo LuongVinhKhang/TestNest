@@ -1,6 +1,6 @@
-import { BasePage } from "./page.base";
+import { ShopBasePage } from "./page.shop-base";
 
-export class ProductDetailsPage extends BasePage {
+export class ShopProductDetailsPage extends ShopBasePage {
   get elements() {
     return {
       ...super.elements,

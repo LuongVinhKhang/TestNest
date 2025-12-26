@@ -1,5 +1,4 @@
-import { Locator, Page } from "@playwright/test";
-import { BasePage } from "./page.base";
+import { ShopBasePage } from "./page.shop-base";
 
 export type SortOption =
   | "name,asc"
@@ -9,7 +8,7 @@ export type SortOption =
   | "co2_rating,asc"
   | "co2_rating,desc";
 
-export class HomePage extends BasePage {
+export class ShopHomePage extends ShopBasePage {
   get elements() {
     return {
       ...super.elements,
@@ -47,6 +46,7 @@ export class HomePage extends BasePage {
   async searchForProduct(text: string) {
     await this.fillSearchText(text);
     await this.clickSearchButton();
+    await this.page.waitForLoadState("networkidle");
   }
 
   async getProductData(): Promise<{ name: string; price: number; co2Rating: string }[]> {

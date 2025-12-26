@@ -40,11 +40,11 @@ export default defineConfig({
     {
       name: "toolshop-simple",
       testDir: "./tests/tool-shop/test/simple",
-      use: { ...devices["Desktop Chrome"] },
+      use: { ...devices["Desktop Chrome"], baseURL: "http://localhost:4200" },
     },
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: { ...devices["Desktop Chrome"], baseURL: "http://localhost:4200" },
     },
 
     {
