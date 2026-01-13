@@ -1,0 +1,24 @@
+{
+  "name": "playwright-explorer",
+  "version": "1.0.0",
+  "description": "AI-driven web test exploration agent using Playwright and TypeScript.",
+  "main": "src/agent.ts",
+  "scripts": {
+    "test": "npx playwright test",
+    "explore": "ts-node src/agent.ts"
+  },
+  "author": "Open Source",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.43.0",
+    "@types/node": "^25.0.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "axios": "^1.6.7"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

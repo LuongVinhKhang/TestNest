@@ -1,0 +1,7 @@
+/agent-context/
+# Ignore codebase-context scripts and outputs
+/codebase-context/
+/tests/generated/
+.env
+playwright-report/
+/codebase-context/summaries/
