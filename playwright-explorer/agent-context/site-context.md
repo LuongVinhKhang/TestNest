@@ -1,0 +1,1268 @@
+
+---
+# be-agent-summary.md
+# Dotnet Backend Deep Summary
+
+## Controller: src/ZensMedical.Api/Controllers/AdditionalUoMController.cs
+- Class: AdditionalUoMController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] delete
+- Method: GetPagedAdditionalUoMs([FromBody] AdditionalUoMFilterRequest request)
+- Method: GetAdditionalUoM([FromBody] CommonFetchRequest request)
+- Method: CreateAdditionalUoM([FromBody] AdditionalUoMCreateRequest request)
+- Method: UpdatAdditionalUoM([FromBody] AdditionalUoMUpdateRequest request)
+- Method: DeleteAdditionalUoM([FromBody] CommonDeleteRequest request)
+
+## Controller: src/ZensMedical.Api/Controllers/AppointmentController.cs
+- Class: AppointmentController
+- [Route] api/[controller]
+- [HttpGet] time-slots
+- [HttpGet] clinics/{clinicId}/time-slots/available
+- [HttpGet] clinics/{clinicId}/time-slots/doctors
+- [HttpPost] time-slots/generate
+- [HttpPost] 
+- [HttpPut] {id}/cancel
+- [HttpGet] {id}
+- [HttpPut] {id}
+- [HttpPost] check-in
+- Method: GetDoctorTimeSlots([FromQuery] GetDoctorTimeSlotQuery query)
+- Method: GetClinicAvailableTimeSlots([FromRoute] Guid clinicId, [FromQuery] DateOnly date, [FromQuery] Guid? doctorId = null)
+- Method: GetDoctorsAtTimeSlot([FromRoute] Guid clinicId, [FromQuery] DateOnly date, [FromQuery] TimeOnly startTime)
+- Method: GenerateDoctorTimeSlots([FromBody] GenerateDoctorTimeSlotCommand request)
+- Method: CreateAppointment([FromBody] CreateAppointmentCommand request)
+- Method: CancelAppointment(Guid id)
+- Method: GetAppointment(Guid id)
+- Method: UpdateAppointment(Guid id, [FromBody] UpdateAppointmentRequestDto appointment)
+- Method: CheckInAppointment([FromBody] CheckInAppointmentRequest request)
+
+## Controller: src/ZensMedical.Api/Controllers/AppointmentTestController.cs
+- Class: AppointmentTestController
+- [Route] api/[controller]
+- [HttpPost] book
+- Method: TestBookAppointment([FromBody] BookAppointmentTestRequest request)
+
+## Controller: src/ZensMedical.Api/Controllers/AuthController.cs
+- Class: AuthController
+- [Route] api/[controller]
+- [HttpPost] login
+- [HttpGet] me
+- [HttpGet] roles
+- [HttpPost] users-by-role
+- [HttpGet] user/{id}
+- [HttpGet] users
+- [HttpPost] create-user
+- [HttpPut] update-user
+- [HttpPut] update-profile
+- [HttpDelete] delete-user/{id}
+- Method: Authenticate([FromBody] LoginRequest request)
+- Method: MyAccount()
+- Method: GetRoles()
+- Method: GetUsersByRoleRequest(string Role, string? SearchTerm)
+- Method: GetUsersByRole([FromBody] GetUsersByRoleRequest request)
+- Method: GetUser(string id)
+- Method: GetPagedUsers(
+            [FromQuery] int pageIndex = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string? searchTerm = null,
+            [FromQuery] string? roleFilter = null,
+            [FromQuery] Guid? clinicId = null,
+            [FromQuery] Guid? departmentId = null,
+            [FromQuery] bool? isActive = null,
+            [FromQuery] DateTime? createdDateFrom = null,
+            [FromQuery] DateTime? createdDateTo = null,
+            [FromQuery] string? sortBy = "CreatedDate",
+            [FromQuery] bool sortDescending = true)
+- Method: CreateUser([FromBody] CreateUserRequest request)
+- Method: UpdateUser([FromBody] UpdateUserRequest request)
+- Method: UpdateProfile([FromBody] UpdateProfileRequest request)
+- Method: DeleteUser(Guid id)
+
+## Controller: src/ZensMedical.Api/Controllers/BillController.cs
+- Class: BillController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpGet] unbilled-items/{visitId}
+- [HttpGet] by-visit/{visitId}
+- [HttpPost] create-from-items
+- [HttpGet] details/by-visit/{visitId}
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] status/update
+- [HttpPost] generate-from-visit
+- [HttpPost] update-draft
+- Method: GetPagedBills([FromBody] BillFilterRequest request)
+- Method: GetBill([FromBody] CommonFetchRequest request)
+- Method: GetUnbilledItems(Guid visitId)
+- Method: GetBillsByVisitId(Guid visitId)
+- Method: CreateBillFromItems([FromBody] CreateBillFromItemsRequest request)
+- Method: GetBillByVisitId(string visitId)
+- Method: CreateBill([FromBody] BillCreateRequest request)
+- Method: UpdateBill([FromBody] BillUpdateRequest request)
+- Method: ChangeStatusBill([FromBody] BillChangeStatusRequest request)
+- Method: GenerateFromVisit([FromBody] GenerateBillFromVisitRequest request)
+- Method: UpdateDraft([FromBody] UpdateDraftBillRequest request)
+
+## Controller: src/ZensMedical.Api/Controllers/CategoryController.cs
+- Class: Category
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] status/update
+- [HttpPost] delete
+- Method: GetPagedCategorys([FromBody] CategoryFilterRequest request)
+- Method: GetCategory([FromBody] CommonFetchRequest request)
+- Method: CreateCategory([FromBody] CategoryCreateRequest request)
+- Method: UpdatCategory([FromBody] CategoryUpdateRequest request)
+- Method: ChangeStatusCategory([FromBody] CommonChangeStatusRequest request)
+- Method: DeleteCategory([FromBody] CommonDeleteRequest request)
+
+## Controller: src/ZensMedical.Api/Controllers/ClinicController.cs
+- Class: ClinicController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] delete
+- Method: GetPagedClinics([FromBody] ClinicFilterRequest request)
+- Method: GetClinic([FromBody] CommonFetchRequest request)
+- Method: CreateClinic([FromBody] ClinicCreateRequest request)
+- Method: UpdateClinic([FromBody] ClinicUpdateRequest request)
+- Method: DeleteClinic([FromBody] CommonDeleteRequest request)
+
+## Controller: src/ZensMedical.Api/Controllers/DepartmentController.cs
+- Class: DepartmentController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] delete
+- Method: GetPagedDepartments([FromBody] DepartmentFilterRequest request)
+- Method: GetDepartment([FromBody] CommonFetchRequest request)
+- Method: CreateDepartment([FromBody] DepartmentCreateRequest request)
+- Method: UpdateDepartment([FromBody] DepartmentUpdateRequest request)
+- Method: DeleteDepartment([FromBody] CommonDeleteRequest request)
+
+## Controller: src/ZensMedical.Api/Controllers/DoctorController.cs
+- Class: DoctorController
+- [Route] api/[controller]
+- [HttpPut] {doctorId}/time-slots/book-out-of-work
+- [HttpPut] {doctorId}/time-slots/{timeslotId}/cancel
+- Method: BookOutOfWorkHours([FromRoute] Guid doctorId, [FromBody] DoctorTimeslotBookOutOfWorkRequestDto request)
+- Method: CancelBookOutOfWorkHours([FromRoute] Guid doctorId, [FromRoute] Guid timeslotId)
+
+## Controller: src/ZensMedical.Api/Controllers/ICD10Controller.cs
+- Class: ICD10Controller
+- [Route] api/[controller]
+- [HttpGet] search
+- [HttpGet] 
+
+## Controller: src/ZensMedical.Api/Controllers/ItemController.cs
+- Class: ItemController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] delete
+- [HttpPost] status/update
+- [HttpPost] uom
+- [HttpPost] itemcode/validate
+- [HttpPost] itemcode/suggest
+- [HttpPost] childItem/paged
+- [HttpPost] childItem/add
+- [HttpPost] childItem/remove
+- Method: GetPagedItems([FromBody] ItemFilterRequest request)
+- Method: GetItem([FromBody] CommonFetchRequest request)
+- Method: CreateItem([FromBody] ItemCreateRequest request)
+- Method: UpdatItem([FromBody] ItemUpdateRequest request)
+- Method: DeleteItem([FromBody] CommonFetchRequest request)
+- Method: ChangeStatusItem([FromBody] CommonChangeStatusRequest request)
+- Method: GetUoMs()
+- Method: ValidateItemCode([FromBody] ItemCodeValidateRequest request)
+- Method: GetSuggestItemCode([FromBody] ItemCodeValidateRequest request)
+- Method: GetPagedChildItems([FromBody] ChildItemFilterRequest request)
+- Method: AddChildItems([FromBody] AddChildItemsRequest request)
+- Method: RemoveChildItems([FromBody] DeleteChildItemsRequest request)
+
+## Controller: src/ZensMedical.Api/Controllers/ItemPriceController.cs
+- Class: ItemPriceController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] delete
+
+## Controller: src/ZensMedical.Api/Controllers/LaboratoryController.cs
+- Class: LaboratoryController
+- [Route] api/[controller]
+- [HttpPost] order
+- [HttpPost] collect-specimen
+- [HttpPost] enter-results
+- [HttpPost] verify-results
+- [HttpGet] visit/{visitId}/results
+- [HttpGet] visit/{visitId}/items
+- [HttpGet] patient/{patientId}/trends
+- [HttpPost] test/add
+- [HttpDelete] test/{id}
+- [HttpGet] worklist
+- [HttpGet] collections/pending
+
+## Controller: src/ZensMedical.Api/Controllers/MedicationItemController.cs
+- Class: MedicationItemController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] search
+- [HttpGet] forms-and-routes
+- [HttpGet] by-drug-class/{drugClass}
+- [HttpPost] prescription-only
+- [HttpPost] otc
+- Method: GetPagedMedications([FromBody] MedicationItemFilterRequest request)
+- Method: GetMedication([FromBody] CommonFetchRequest request)
+- Method: CreateMedication([FromBody] MedicationItemCreateRequest request)
+- Method: UpdateMedication([FromBody] MedicationItemUpdateRequest request)
+- Method: SearchMedications([FromBody] MedicationSearchRequest request)
+- Method: GetMedicationFormsAndRoutes()
+- Method: GetMedicationsByDrugClass(string drugClass)
+- Method: GetPrescriptionMedications([FromBody] MedicationItemFilterRequest request)
+- Method: GetOTCMedications([FromBody] MedicationItemFilterRequest request)
+
+## Controller: src/ZensMedical.Api/Controllers/OrganizationController.cs
+- Class: OrganizationController
+- [Route] api/[controller]
+- [HttpGet] 
+- [HttpGet] {id}
+- [HttpPost] 
+- [HttpPut] {id}
+- [HttpDelete] {id}
+
+## Controller: src/ZensMedical.Api/Controllers/PatientController.cs
+- Class: PatientController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] delete
+- Method: GetPagedPatients([FromBody] PatientFilterRequest request)
+- Method: GetPatient([FromBody] CommonFetchRequest request)
+- Method: CreatePatient([FromBody] PatientRequest request)
+- Method: UpdatePatient([FromBody] PatientRequest request)
+- Method: DeletePatient([FromBody] CommonDeleteRequest request)
+
+## Controller: src/ZensMedical.Api/Controllers/PaymentController.cs
+- Class: PaymentController
+- [Route] api/[controller]
+- [HttpPost] record
+- [HttpPost] by-bill
+- [HttpPost] by-visit
+- [HttpGet] {id}
+
+## Controller: src/ZensMedical.Api/Controllers/PharmacyController.cs
+- Class: PharmacyController
+- [Route] api/[controller]
+- [HttpPost] prescription
+- [HttpGet] prescription/{id:guid}
+- [HttpPost] prescription/medication
+- [HttpDelete] prescription/medication
+- [HttpPost] queue
+- [HttpPost] dispense
+- [HttpPost] check-safety
+- [HttpPost] patient-history
+- [HttpGet] patient/{patientId:guid}/medications
+
+## Controller: src/ZensMedical.Api/Controllers/PhysicalExaminationTemplateController.cs
+- Class: PhysicalExaminationTemplateController
+- [Route] api/[controller]
+- [HttpPost] list
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] delete/{id}
+
+## Controller: src/ZensMedical.Api/Controllers/RadiologyController.cs
+- Class: RadiologyController
+- [Route] api/[controller]
+- [HttpPost] order
+- [HttpPost] schedule
+- [HttpPost] perform
+- [HttpPost] interpret
+- [HttpGet] visit/{visitId}/results
+- [HttpPost] study/add
+- [HttpDelete] study/{id}
+- [HttpGet] visit/{visitId}/items
+- [HttpGet] worklist
+- [HttpGet] catalog
+- Method: CreateRadiologyOrder([FromBody] RadiologyOrderCreateRequest request)
+- Method: ScheduleRadiologyStudy([FromBody] ScheduleRadiologyStudyRequest request)
+- Method: PerformRadiologyStudy([FromBody] PerformRadiologyStudyRequest request)
+- Method: InterpretRadiologyStudy([FromBody] InterpretRadiologyStudyRequest request)
+- Method: GetRadiologyResults(Guid visitId)
+- Method: AddRadiologyStudy([FromBody] AddRadiologyStudyRequest request)
+- Method: RemoveRadiologyStudy(Guid id, [FromBody] RemoveRadiologyStudyRequest? request)
+- Method: GetVisitRadiologyItems(Guid visitId)
+- Method: GetImagingWorklist([FromQuery] ImagingWorklistRequest request)
+- Method: GetImagingCatalog([FromQuery] ImagingCatalogRequest request)
+
+## Controller: src/ZensMedical.Api/Controllers/RatePlanController.cs
+- Class: RatePlanController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] status/update
+- [HttpPost] delete
+
+## Controller: src/ZensMedical.Api/Controllers/UoMController.cs
+- Class: UoMController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] status/update
+- [HttpPost] delete
+- [HttpPost] uom
+- Method: GetPagedUoMs([FromBody] UoMFilterRequest request)
+- Method: GetUoM([FromBody] CommonFetchRequest request)
+- Method: CreateUoM([FromBody] UoMCreateRequest request)
+- Method: UpdatUoM([FromBody] UoMUpdateRequest request)
+- Method: UpdateStatusUoM([FromBody] CommonChangeStatusRequest request)
+- Method: DeleteUoM([FromBody] CommonDeleteRequest request)
+- Method: GetUoMTypes()
+
+## Controller: src/ZensMedical.Api/Controllers/VersionController.cs
+- Class: VersionController
+- [Route] api/[controller]
+- [HttpGet] 
+- Method: Get()
+
+## Controller: src/ZensMedical.Api/Controllers/VisitController.cs
+- Class: VisitController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] status/update
+- [HttpPost] walk-in-check-in
+- [HttpPost] start-examination
+- [HttpGet] {visitId}/allowed-transitions
+- [HttpGet] {visitId}/workflow-state
+- [HttpPost] complete
+- [HttpPost] cancel
+- [HttpPost] request-services
+- [HttpPost] ready-for-billing
+- [HttpPost] vital-signs
+- [HttpGet] {visitId}/vital-signs
+- [HttpPost] chief-complaint
+- [HttpGet] {visitId}/chief-complaint
+- [HttpGet] chief-complaint-templates
+- [HttpPost] history-present-illness
+- [HttpGet] {visitId}/history-present-illness
+- [HttpPost] physical-examination
+- [HttpGet] {visitId}/physical-examination
+- [HttpPost] diagnosis
+- [HttpGet] {visitId}/diagnosis
+- [HttpPost] clinical-impression
+- [HttpGet] {visitId}/prescriptions
+
+## Controller: src/ZensMedical.Api/Controllers/VisitItemController.cs
+- Class: VisitItemController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] delete
+
+## Controller: src/ZensMedical.Api/Controllers/VisitPriorityController.cs
+- Class: VisitPriorityController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] delete
+- [HttpPost] status/update
+
+## Controller: src/ZensMedical.Api/Controllers/VisitStatusController.cs
+- Class: VisitStatusController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] delete
+- [HttpPost] status/update
+
+## Controller: src/ZensMedical.Api/Controllers/VisitTypeController.cs
+- Class: VisitTypeController
+- [Route] api/[controller]
+- [HttpPost] paged
+- [HttpPost] details
+- [HttpPost] create
+- [HttpPost] update
+- [HttpPost] delete
+- [HttpPost] status/update
+
+## Controller: src/ZensMedical.Api/Controllers/VisitWorkflowController.cs
+- Class: VisitWorkflowController
+- [Route] api/admin/visit-workflow
+- [HttpPost] configure
+
+
+---
+# be-summary.md
+# Backend (dotnet) Summary
+
+## Controllers
+- src/ZensMedical.Api/Controllers/AdditionalUoMController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] delete
+- src/ZensMedical.Api/Controllers/AppointmentController.cs
+  - [Get] time-slots
+  - [Get] clinics/{clinicId}/time-slots/available
+  - [Get] clinics/{clinicId}/time-slots/doctors
+  - [Post] time-slots/generate
+  - [Post] 
+  - [Put] {id}/cancel
+  - [Get] {id}
+  - [Put] {id}
+  - [Post] check-in
+- src/ZensMedical.Api/Controllers/AppointmentTestController.cs
+  - [Post] book
+- src/ZensMedical.Api/Controllers/AuthController.cs
+  - [Post] login
+  - [Get] me
+  - [Get] roles
+  - [Post] users-by-role
+  - [Get] user/{id}
+  - [Get] users
+  - [Post] create-user
+  - [Put] update-user
+  - [Put] update-profile
+  - [Delete] delete-user/{id}
+- src/ZensMedical.Api/Controllers/BillController.cs
+  - [Post] paged
+  - [Post] details
+  - [Get] unbilled-items/{visitId}
+  - [Get] by-visit/{visitId}
+  - [Post] create-from-items
+  - [Get] details/by-visit/{visitId}
+  - [Post] create
+  - [Post] update
+  - [Post] status/update
+  - [Post] generate-from-visit
+  - [Post] update-draft
+- src/ZensMedical.Api/Controllers/CategoryController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] status/update
+  - [Post] delete
+- src/ZensMedical.Api/Controllers/ClinicController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] delete
+- src/ZensMedical.Api/Controllers/DepartmentController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] delete
+- src/ZensMedical.Api/Controllers/DoctorController.cs
+  - [Put] {doctorId}/time-slots/book-out-of-work
+  - [Put] {doctorId}/time-slots/{timeslotId}/cancel
+- src/ZensMedical.Api/Controllers/ICD10Controller.cs
+  - [Get] search
+  - [Get] 
+- src/ZensMedical.Api/Controllers/ItemController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] delete
+  - [Post] status/update
+  - [Post] uom
+  - [Post] itemcode/validate
+  - [Post] itemcode/suggest
+  - [Post] childItem/paged
+  - [Post] childItem/add
+  - [Post] childItem/remove
+- src/ZensMedical.Api/Controllers/ItemPriceController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] delete
+- src/ZensMedical.Api/Controllers/LaboratoryController.cs
+  - [Post] order
+  - [Post] collect-specimen
+  - [Post] enter-results
+  - [Post] verify-results
+  - [Get] visit/{visitId}/results
+  - [Get] visit/{visitId}/items
+  - [Get] patient/{patientId}/trends
+  - [Post] test/add
+  - [Delete] test/{id}
+  - [Get] worklist
+  - [Get] collections/pending
+- src/ZensMedical.Api/Controllers/MedicationItemController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] search
+  - [Get] forms-and-routes
+  - [Get] by-drug-class/{drugClass}
+  - [Post] prescription-only
+  - [Post] otc
+- src/ZensMedical.Api/Controllers/OrganizationController.cs
+  - [Get] 
+  - [Get] {id}
+  - [Post] 
+  - [Put] {id}
+  - [Delete] {id}
+- src/ZensMedical.Api/Controllers/PatientController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] delete
+- src/ZensMedical.Api/Controllers/PaymentController.cs
+  - [Post] record
+  - [Post] by-bill
+  - [Post] by-visit
+  - [Get] {id}
+- src/ZensMedical.Api/Controllers/PharmacyController.cs
+  - [Post] prescription
+  - [Get] prescription/{id:guid}
+  - [Post] prescription/medication
+  - [Delete] prescription/medication
+  - [Post] queue
+  - [Post] dispense
+  - [Post] check-safety
+  - [Post] patient-history
+  - [Get] patient/{patientId:guid}/medications
+- src/ZensMedical.Api/Controllers/PhysicalExaminationTemplateController.cs
+  - [Post] list
+  - [Post] create
+  - [Post] update
+  - [Post] delete/{id}
+- src/ZensMedical.Api/Controllers/RadiologyController.cs
+  - [Post] order
+  - [Post] schedule
+  - [Post] perform
+  - [Post] interpret
+  - [Get] visit/{visitId}/results
+  - [Post] study/add
+  - [Delete] study/{id}
+  - [Get] visit/{visitId}/items
+  - [Get] worklist
+  - [Get] catalog
+- src/ZensMedical.Api/Controllers/RatePlanController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] status/update
+  - [Post] delete
+- src/ZensMedical.Api/Controllers/UoMController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] status/update
+  - [Post] delete
+  - [Post] uom
+- src/ZensMedical.Api/Controllers/VersionController.cs
+  - [Get] 
+- src/ZensMedical.Api/Controllers/VisitController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] status/update
+  - [Post] walk-in-check-in
+  - [Post] start-examination
+  - [Get] {visitId}/allowed-transitions
+  - [Get] {visitId}/workflow-state
+  - [Post] complete
+  - [Post] cancel
+  - [Post] request-services
+  - [Post] ready-for-billing
+  - [Post] vital-signs
+  - [Get] {visitId}/vital-signs
+  - [Post] chief-complaint
+  - [Get] {visitId}/chief-complaint
+  - [Get] chief-complaint-templates
+  - [Post] history-present-illness
+  - [Get] {visitId}/history-present-illness
+  - [Post] physical-examination
+  - [Get] {visitId}/physical-examination
+  - [Post] diagnosis
+  - [Get] {visitId}/diagnosis
+  - [Post] clinical-impression
+  - [Get] {visitId}/prescriptions
+- src/ZensMedical.Api/Controllers/VisitItemController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] delete
+- src/ZensMedical.Api/Controllers/VisitPriorityController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] delete
+  - [Post] status/update
+- src/ZensMedical.Api/Controllers/VisitStatusController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] delete
+  - [Post] status/update
+- src/ZensMedical.Api/Controllers/VisitTypeController.cs
+  - [Post] paged
+  - [Post] details
+  - [Post] create
+  - [Post] update
+  - [Post] delete
+  - [Post] status/update
+- src/ZensMedical.Api/Controllers/VisitWorkflowController.cs
+  - [Post] configure
+
+
+---
+# fe-agent-summary.md
+# Next.js Frontend Deep Summary
+
+## App Directory Routes (src/app)
+- /src/app/(home) (folder)
+- /src/app/(home)/layout.jsx
+- /src/app/(home)/page.jsx
+- /src/app/auth (folder)
+- /src/app/auth/forgot-password (folder)
+- /src/app/auth/forgot-password/layout.jsx
+- /src/app/auth/forgot-password/page.jsx
+- /src/app/auth/login (folder)
+- /src/app/auth/login/layout.jsx
+- /src/app/auth/login/page.jsx
+- /src/app/auth/register (folder)
+- /src/app/auth/register/layout.jsx
+- /src/app/auth/register/page.jsx
+- /src/app/auth/reset-password (folder)
+- /src/app/auth/reset-password/layout.jsx
+- /src/app/auth/reset-password/page.jsx
+- /src/app/auth/verify (folder)
+- /src/app/auth/verify/layout.jsx
+- /src/app/auth/verify/page.jsx
+- /src/app/dashboard (folder)
+- /src/app/dashboard/appointment (folder)
+- /src/app/dashboard/appointment/[id] (folder)
+- /src/app/dashboard/appointment/[id]/edit (folder)
+- /src/app/dashboard/appointment/[id]/edit/page.jsx
+- /src/app/dashboard/appointment/[id]/page.jsx
+- /src/app/dashboard/appointment/calendar (folder)
+- /src/app/dashboard/appointment/calendar/page.jsx
+- /src/app/dashboard/appointment/list (folder)
+- /src/app/dashboard/appointment/list/page.jsx
+- /src/app/dashboard/appointment/new (folder)
+- /src/app/dashboard/appointment/new/page.jsx
+- /src/app/dashboard/appointment/page.jsx
+- /src/app/dashboard/calendar (folder)
+- /src/app/dashboard/calendar/page.jsx
+- /src/app/dashboard/imaging (folder)
+- /src/app/dashboard/imaging/catalog (folder)
+- /src/app/dashboard/imaging/catalog/page.tsx
+- /src/app/dashboard/imaging/page.tsx
+- /src/app/dashboard/imaging/worklist (folder)
+- /src/app/dashboard/imaging/worklist/page.tsx
+- /src/app/dashboard/inpatient (folder)
+- /src/app/dashboard/inpatient/page.jsx
+- /src/app/dashboard/invoice (folder)
+- /src/app/dashboard/invoice/[id] (folder)
+- /src/app/dashboard/invoice/[id]/edit (folder)
+- /src/app/dashboard/invoice/[id]/edit/page.jsx
+- /src/app/dashboard/invoice/[id]/page.jsx
+- /src/app/dashboard/invoice/new (folder)
+- /src/app/dashboard/invoice/new/page.jsx
+- /src/app/dashboard/invoice/page.jsx
+- /src/app/dashboard/lab (folder)
+- /src/app/dashboard/lab/approval (folder)
+- /src/app/dashboard/lab/approval/page.tsx
+- /src/app/dashboard/lab/collection (folder)
+- /src/app/dashboard/lab/collection/page.tsx
+- /src/app/dashboard/lab/results (folder)
+- /src/app/dashboard/lab/results/page.tsx
+- /src/app/dashboard/lab/worklist (folder)
+- /src/app/dashboard/lab/worklist/page.tsx
+- /src/app/dashboard/layout.jsx
+- /src/app/dashboard/loading.jsx
+- /src/app/dashboard/organization (folder)
+- /src/app/dashboard/organization/[id] (folder)
+- /src/app/dashboard/organization/[id]/edit (folder)
+- /src/app/dashboard/organization/[id]/edit/page.jsx
+- /src/app/dashboard/organization/[id]/page.jsx
+- /src/app/dashboard/organization/new (folder)
+- /src/app/dashboard/organization/new/page.jsx
+- /src/app/dashboard/organization/page.jsx
+- /src/app/dashboard/outpatient (folder)
+- /src/app/dashboard/outpatient/[id] (folder)
+- /src/app/dashboard/outpatient/[id]/edit (folder)
+- /src/app/dashboard/outpatient/[id]/edit/page.jsx
+- /src/app/dashboard/outpatient/[id]/page.jsx
+- /src/app/dashboard/outpatient/new (folder)
+- /src/app/dashboard/outpatient/new/page.jsx
+- /src/app/dashboard/outpatient/page.jsx
+- /src/app/dashboard/page.jsx
+- /src/app/dashboard/patient (folder)
+- /src/app/dashboard/patient/[id] (folder)
+- /src/app/dashboard/patient/[id]/edit (folder)
+- /src/app/dashboard/patient/[id]/edit/page.jsx
+- /src/app/dashboard/patient/[id]/page.jsx
+- /src/app/dashboard/patient/new (folder)
+- /src/app/dashboard/patient/new/page.jsx
+- /src/app/dashboard/patient/page.jsx
+- /src/app/dashboard/permission (folder)
+- /src/app/dashboard/permission/page.jsx
+- /src/app/dashboard/setting (folder)
+- /src/app/dashboard/setting/category (folder)
+- /src/app/dashboard/setting/category/[id] (folder)
+- /src/app/dashboard/setting/category/[id]/edit (folder)
+- /src/app/dashboard/setting/category/[id]/edit/page.jsx
+- /src/app/dashboard/setting/category/[id]/page.jsx
+- /src/app/dashboard/setting/category/new (folder)
+- /src/app/dashboard/setting/category/new/page.jsx
+- /src/app/dashboard/setting/category/page.jsx
+- /src/app/dashboard/setting/clinic (folder)
+- /src/app/dashboard/setting/clinic/[id] (folder)
+- /src/app/dashboard/setting/clinic/[id]/edit (folder)
+- /src/app/dashboard/setting/clinic/[id]/edit/page.jsx
+- /src/app/dashboard/setting/clinic/[id]/page.jsx
+- /src/app/dashboard/setting/clinic/new (folder)
+- /src/app/dashboard/setting/clinic/new/page.jsx
+- /src/app/dashboard/setting/clinic/page.jsx
+- /src/app/dashboard/setting/department (folder)
+- /src/app/dashboard/setting/department/[id] (folder)
+- /src/app/dashboard/setting/department/[id]/edit (folder)
+- /src/app/dashboard/setting/department/[id]/edit/page.jsx
+- /src/app/dashboard/setting/department/[id]/page.jsx
+- /src/app/dashboard/setting/department/new (folder)
+- /src/app/dashboard/setting/department/new/page.jsx
+- /src/app/dashboard/setting/department/page.jsx
+- /src/app/dashboard/setting/item (folder)
+- /src/app/dashboard/setting/item/[id] (folder)
+- /src/app/dashboard/setting/item/[id]/edit (folder)
+- /src/app/dashboard/setting/item/[id]/edit/page.jsx
+- /src/app/dashboard/setting/item/[id]/page.jsx
+- /src/app/dashboard/setting/item/new (folder)
+- /src/app/dashboard/setting/item/new/page.jsx
+- /src/app/dashboard/setting/item/page.jsx
+- /src/app/dashboard/setting/page.jsx
+- /src/app/dashboard/setting/rate-plan (folder)
+- /src/app/dashboard/setting/rate-plan/[id] (folder)
+- /src/app/dashboard/setting/rate-plan/[id]/edit (folder)
+- /src/app/dashboard/setting/rate-plan/[id]/edit/page.jsx
+- /src/app/dashboard/setting/rate-plan/[id]/page.jsx
+- /src/app/dashboard/setting/rate-plan/new (folder)
+- /src/app/dashboard/setting/rate-plan/new/page.jsx
+- /src/app/dashboard/setting/rate-plan/page.jsx
+- /src/app/dashboard/setting/uoM (folder)
+- /src/app/dashboard/setting/uoM/[id] (folder)
+- /src/app/dashboard/setting/uoM/[id]/edit (folder)
+- /src/app/dashboard/setting/uoM/[id]/edit/page.jsx
+- /src/app/dashboard/setting/uoM/[id]/page.jsx
+- /src/app/dashboard/setting/uoM/new (folder)
+- /src/app/dashboard/setting/uoM/new/page.jsx
+- /src/app/dashboard/setting/uoM/page.jsx
+- /src/app/dashboard/setting/visit-priority (folder)
+- /src/app/dashboard/setting/visit-priority/[id] (folder)
+- /src/app/dashboard/setting/visit-priority/[id]/edit (folder)
+- /src/app/dashboard/setting/visit-priority/[id]/edit/page.jsx
+- /src/app/dashboard/setting/visit-priority/[id]/page.jsx
+- /src/app/dashboard/setting/visit-priority/new (folder)
+- /src/app/dashboard/setting/visit-priority/new/page.jsx
+- /src/app/dashboard/setting/visit-priority/page.jsx
+- /src/app/dashboard/setting/visit-status (folder)
+- /src/app/dashboard/setting/visit-status/[id] (folder)
+- /src/app/dashboard/setting/visit-status/[id]/edit (folder)
+- /src/app/dashboard/setting/visit-status/[id]/edit/page.jsx
+- /src/app/dashboard/setting/visit-status/[id]/page.jsx
+- /src/app/dashboard/setting/visit-status/new (folder)
+- /src/app/dashboard/setting/visit-status/new/page.jsx
+- /src/app/dashboard/setting/visit-status/page.jsx
+- /src/app/dashboard/setting/visit-type (folder)
+- /src/app/dashboard/setting/visit-type/[id] (folder)
+- /src/app/dashboard/setting/visit-type/[id]/edit (folder)
+- /src/app/dashboard/setting/visit-type/[id]/edit/page.jsx
+- /src/app/dashboard/setting/visit-type/[id]/page.jsx
+- /src/app/dashboard/setting/visit-type/new (folder)
+- /src/app/dashboard/setting/visit-type/new/page.jsx
+- /src/app/dashboard/setting/visit-type/page.jsx
+- /src/app/dashboard/user (folder)
+- /src/app/dashboard/user/[id] (folder)
+- /src/app/dashboard/user/[id]/edit (folder)
+- /src/app/dashboard/user/[id]/edit/page.jsx
+- /src/app/dashboard/user/cards (folder)
+- /src/app/dashboard/user/cards/page.jsx
+- /src/app/dashboard/user/list (folder)
+- /src/app/dashboard/user/list/page.jsx
+- /src/app/dashboard/user/new (folder)
+- /src/app/dashboard/user/new/page.jsx
+- /src/app/dashboard/user/page.jsx
+- /src/app/dashboard/user/profile (folder)
+- /src/app/dashboard/user/profile/page.jsx
+- /src/app/error (folder)
+- /src/app/error/403 (folder)
+- /src/app/error/403/page.jsx
+- /src/app/error/404 (folder)
+- /src/app/error/404/page.jsx
+- /src/app/error/500 (folder)
+- /src/app/error/500/page.jsx
+- /src/app/layout.jsx
+- /src/app/loading.jsx
+- /src/app/not-found.jsx
+
+## File-based Routes (src/routes)
+- /src/routes/components (folder)
+- /src/routes/components/index.js
+- /src/routes/components/router-link.jsx
+- /src/routes/hooks (folder)
+- /src/routes/hooks/index.js
+- /src/routes/hooks/use-params.js
+- /src/routes/hooks/use-pathname.js
+- /src/routes/hooks/use-router.js
+- /src/routes/hooks/use-search-params.js
+- /src/routes/paths.js
+
+## Components (src/components)
+- Component: QueryProvider (src/components/providers/query-provider.tsx)
+  - Props: { children }
+
+
+---
+# fe-summary.md
+# Frontend (Next.js) Summary
+
+## App Directory (src/app/)
+- src/app/(home)/layout.jsx
+- src/app/(home)/page.jsx
+- src/app/auth/forgot-password/layout.jsx
+- src/app/auth/forgot-password/page.jsx
+- src/app/auth/login/layout.jsx
+- src/app/auth/login/page.jsx
+- src/app/auth/register/layout.jsx
+- src/app/auth/register/page.jsx
+- src/app/auth/reset-password/layout.jsx
+- src/app/auth/reset-password/page.jsx
+- src/app/auth/verify/layout.jsx
+- src/app/auth/verify/page.jsx
+- src/app/dashboard/appointment/[id]/edit/page.jsx
+- src/app/dashboard/appointment/[id]/page.jsx
+- src/app/dashboard/appointment/calendar/page.jsx
+- src/app/dashboard/appointment/list/page.jsx
+- src/app/dashboard/appointment/new/page.jsx
+- src/app/dashboard/appointment/page.jsx
+- src/app/dashboard/calendar/page.jsx
+- src/app/dashboard/imaging/catalog/page.tsx
+- src/app/dashboard/imaging/page.tsx
+- src/app/dashboard/imaging/worklist/page.tsx
+- src/app/dashboard/inpatient/page.jsx
+- src/app/dashboard/invoice/[id]/edit/page.jsx
+- src/app/dashboard/invoice/[id]/page.jsx
+- src/app/dashboard/invoice/new/page.jsx
+- src/app/dashboard/invoice/page.jsx
+- src/app/dashboard/lab/approval/page.tsx
+- src/app/dashboard/lab/collection/page.tsx
+- src/app/dashboard/lab/results/page.tsx
+- src/app/dashboard/lab/worklist/page.tsx
+- src/app/dashboard/layout.jsx
+- src/app/dashboard/loading.jsx
+- src/app/dashboard/organization/[id]/edit/page.jsx
+- src/app/dashboard/organization/[id]/page.jsx
+- src/app/dashboard/organization/new/page.jsx
+- src/app/dashboard/organization/page.jsx
+- src/app/dashboard/outpatient/[id]/edit/page.jsx
+- src/app/dashboard/outpatient/[id]/page.jsx
+- src/app/dashboard/outpatient/new/page.jsx
+- src/app/dashboard/outpatient/page.jsx
+- src/app/dashboard/page.jsx
+- src/app/dashboard/patient/[id]/edit/page.jsx
+- src/app/dashboard/patient/[id]/page.jsx
+- src/app/dashboard/patient/new/page.jsx
+- src/app/dashboard/patient/page.jsx
+- src/app/dashboard/permission/page.jsx
+- src/app/dashboard/setting/category/[id]/edit/page.jsx
+- src/app/dashboard/setting/category/[id]/page.jsx
+- src/app/dashboard/setting/category/new/page.jsx
+- src/app/dashboard/setting/category/page.jsx
+- src/app/dashboard/setting/clinic/[id]/edit/page.jsx
+- src/app/dashboard/setting/clinic/[id]/page.jsx
+- src/app/dashboard/setting/clinic/new/page.jsx
+- src/app/dashboard/setting/clinic/page.jsx
+- src/app/dashboard/setting/department/[id]/edit/page.jsx
+- src/app/dashboard/setting/department/[id]/page.jsx
+- src/app/dashboard/setting/department/new/page.jsx
+- src/app/dashboard/setting/department/page.jsx
+- src/app/dashboard/setting/item/[id]/edit/page.jsx
+- src/app/dashboard/setting/item/[id]/page.jsx
+- src/app/dashboard/setting/item/new/page.jsx
+- src/app/dashboard/setting/item/page.jsx
+- src/app/dashboard/setting/page.jsx
+- src/app/dashboard/setting/rate-plan/[id]/edit/page.jsx
+- src/app/dashboard/setting/rate-plan/[id]/page.jsx
+- src/app/dashboard/setting/rate-plan/new/page.jsx
+- src/app/dashboard/setting/rate-plan/page.jsx
+- src/app/dashboard/setting/uoM/[id]/edit/page.jsx
+- src/app/dashboard/setting/uoM/[id]/page.jsx
+- src/app/dashboard/setting/uoM/new/page.jsx
+- src/app/dashboard/setting/uoM/page.jsx
+- src/app/dashboard/setting/visit-priority/[id]/edit/page.jsx
+- src/app/dashboard/setting/visit-priority/[id]/page.jsx
+- src/app/dashboard/setting/visit-priority/new/page.jsx
+- src/app/dashboard/setting/visit-priority/page.jsx
+- src/app/dashboard/setting/visit-status/[id]/edit/page.jsx
+- src/app/dashboard/setting/visit-status/[id]/page.jsx
+- src/app/dashboard/setting/visit-status/new/page.jsx
+- src/app/dashboard/setting/visit-status/page.jsx
+- src/app/dashboard/setting/visit-type/[id]/edit/page.jsx
+- src/app/dashboard/setting/visit-type/[id]/page.jsx
+- src/app/dashboard/setting/visit-type/new/page.jsx
+- src/app/dashboard/setting/visit-type/page.jsx
+- src/app/dashboard/user/[id]/edit/page.jsx
+- src/app/dashboard/user/cards/page.jsx
+- src/app/dashboard/user/list/page.jsx
+- src/app/dashboard/user/new/page.jsx
+- src/app/dashboard/user/page.jsx
+- src/app/dashboard/user/profile/page.jsx
+- src/app/error/403/page.jsx
+- src/app/error/404/page.jsx
+- src/app/error/500/page.jsx
+- src/app/layout.jsx
+- src/app/loading.jsx
+- src/app/not-found.jsx
+
+## Components (src/components/)
+- src/components/animate/animate-border.jsx
+- src/components/animate/animate-count-up.jsx
+- src/components/animate/animate-logo.jsx
+- src/components/animate/animate-text.jsx
+- src/components/animate/back-to-top-button.jsx
+- src/components/animate/features.js
+- src/components/animate/index.js
+- src/components/animate/motion-container.jsx
+- src/components/animate/motion-lazy.jsx
+- src/components/animate/motion-viewport.jsx
+- src/components/animate/scroll-progress/index.js
+- src/components/animate/scroll-progress/scroll-progress.jsx
+- src/components/animate/scroll-progress/use-scroll-progress.js
+- src/components/animate/variants/actions.js
+- src/components/animate/variants/background.js
+- src/components/animate/variants/bounce.js
+- src/components/animate/variants/container.js
+- src/components/animate/variants/fade.js
+- src/components/animate/variants/flip.js
+- src/components/animate/variants/index.js
+- src/components/animate/variants/path.js
+- src/components/animate/variants/rotate.js
+- src/components/animate/variants/scale.js
+- src/components/animate/variants/slide.js
+- src/components/animate/variants/transition.js
+- src/components/animate/variants/zoom.js
+- src/components/carousel/breakpoints.js
+- src/components/carousel/carousel.jsx
+- src/components/carousel/classes.js
+- src/components/carousel/components/arrow-button.jsx
+- src/components/carousel/components/carousel-arrow-buttons.jsx
+- src/components/carousel/components/carousel-dot-buttons.jsx
+- src/components/carousel/components/carousel-progress-bar.jsx
+- src/components/carousel/components/carousel-slide.jsx
+- src/components/carousel/components/carousel-thumb.jsx
+- src/components/carousel/components/carousel-thumbs.jsx
+- src/components/carousel/components/index.js
+- src/components/carousel/hooks/use-carousel-arrows.js
+- src/components/carousel/hooks/use-carousel-auto-play.js
+- src/components/carousel/hooks/use-carousel-auto-scroll.js
+- src/components/carousel/hooks/use-carousel-dots.js
+- src/components/carousel/hooks/use-carousel-parallax.js
+- src/components/carousel/hooks/use-carousel-progress.js
+- src/components/carousel/hooks/use-carousel.js
+- src/components/carousel/hooks/use-thumbs.js
+- src/components/carousel/index.js
+- src/components/carousel/utils.js
+- src/components/chart/chart.jsx
+- src/components/chart/classes.js
+- src/components/chart/components/chart-legends.jsx
+- src/components/chart/components/chart-loading.jsx
+- src/components/chart/components/chart-select.jsx
+- src/components/chart/components/index.js
+- src/components/chart/index.js
+- src/components/chart/styles.css
+- src/components/chart/use-chart.js
+- src/components/color-utils/classes.js
+- src/components/color-utils/color-picker.jsx
+- src/components/color-utils/color-preview.jsx
+- src/components/color-utils/index.js
+- src/components/country-select/country-select.jsx
+- src/components/country-select/index.js
+- src/components/custom-breadcrumbs/back-link.jsx
+- src/components/custom-breadcrumbs/breadcrumb-link.jsx
+- src/components/custom-breadcrumbs/custom-breadcrumbs.jsx
+- src/components/custom-breadcrumbs/index.js
+- src/components/custom-breadcrumbs/more-links.jsx
+- src/components/custom-breadcrumbs/styles.js
+- src/components/custom-date-range-picker/custom-date-range-picker.jsx
+- src/components/custom-date-range-picker/index.js
+- src/components/custom-date-range-picker/use-date-range-picker.js
+- src/components/custom-dialog/confirm-dialog-with-reason.tsx
+- src/components/custom-dialog/confirm-dialog.jsx
+- src/components/custom-dialog/confirm-dialog.tsx
+- src/components/custom-dialog/index.js
+- src/components/custom-dialog/index.ts
+- src/components/custom-popover/custom-popover.jsx
+- src/components/custom-popover/index.js
+- src/components/custom-popover/styles.jsx
+- src/components/custom-popover/utils.js
+- src/components/custom-tabs/custom-tabs.jsx
+- src/components/custom-tabs/index.js
+- src/components/editor/classes.js
+- src/components/editor/components/code-highlight-block.css
+- src/components/editor/components/code-highlight-block.jsx
+- src/components/editor/components/heading-block.jsx
+- src/components/editor/components/image-block.jsx
+- src/components/editor/components/link-block.jsx
+- src/components/editor/components/toolbar-item.jsx
+- src/components/editor/editor.jsx
+- src/components/editor/index.js
+- src/components/editor/styles.jsx
+- src/components/editor/toolbar.jsx
+- src/components/empty-content/empty-content.jsx
+- src/components/empty-content/index.js
+- src/components/file-thumbnail/action-buttons.jsx
+- src/components/file-thumbnail/classes.js
+- src/components/file-thumbnail/file-thumbnail.jsx
+- src/components/file-thumbnail/index.js
+- src/components/file-thumbnail/utils.js
+- src/components/filters-result/filters-block.jsx
+- src/components/filters-result/filters-result.jsx
+- src/components/filters-result/index.js
+- src/components/flag-icon/classes.js
+- src/components/flag-icon/flag-icon.jsx
+- src/components/flag-icon/index.js
+- src/components/hook-form/fields.jsx
+- src/components/hook-form/form-provider.jsx
+- src/components/hook-form/help-text.jsx
+- src/components/hook-form/index.js
+- src/components/hook-form/rhf-autocomplete.jsx
+- src/components/hook-form/rhf-checkbox.jsx
+- src/components/hook-form/rhf-code.jsx
+- src/components/hook-form/rhf-country-select.jsx
+- src/components/hook-form/rhf-date-picker.jsx
+- src/components/hook-form/rhf-editor.jsx
+- src/components/hook-form/rhf-number-input.jsx
+- src/components/hook-form/rhf-phone-input.jsx
+- src/components/hook-form/rhf-radio-group.jsx
+- src/components/hook-form/rhf-rating.jsx
+- src/components/hook-form/rhf-select.jsx
+- src/components/hook-form/rhf-slider.jsx
+- src/components/hook-form/rhf-switch.jsx
+- src/components/hook-form/rhf-text-field.jsx
+- src/components/hook-form/rhf-upload.jsx
+- src/components/hook-form/schema-helper.js
+- src/components/iconify/classes.js
+- src/components/iconify/icon-sets.js
+- src/components/iconify/iconify.jsx
+- src/components/iconify/index.js
+- src/components/iconify/register-icons.js
+- src/components/image/classes.js
+- src/components/image/image.jsx
+- src/components/image/index.js
+- src/components/image/styles.js
+- src/components/label/classes.js
+- src/components/label/index.js
+- src/components/label/label.jsx
+- src/components/label/styles.jsx
+- src/components/lightbox/classes.js
+- src/components/lightbox/index.js
+- src/components/lightbox/lightbox.jsx
+- src/components/lightbox/styles.css
+- src/components/lightbox/use-light-box.js
+- src/components/lightbox/utils.js
+- src/components/loading-screen/index.js
+- src/components/loading-screen/loading-screen.jsx
+- src/components/loading-screen/splash-screen.jsx
+- src/components/logo/classes.js
+- src/components/logo/index.js
+- src/components/logo/logo.jsx
+- src/components/map/index.js
+- src/components/map/map-controls.jsx
+- src/components/map/map-marker.jsx
+- src/components/map/map-popup.jsx
+- src/components/map/map.jsx
+- src/components/map/styles.css
+- src/components/markdown/classes.js
+- src/components/markdown/code-highlight-block.css
+- src/components/markdown/html-tags.js
+- src/components/markdown/html-to-markdown.js
+- src/components/markdown/index.js
+- src/components/markdown/markdown.jsx
+- src/components/markdown/styles.js
+- src/components/mega-menu/components/index.js
+- src/components/mega-menu/components/nav-carousel.jsx
+- src/components/mega-menu/components/nav-drawer.jsx
+- src/components/mega-menu/components/nav-dropdown-content.jsx
+- src/components/mega-menu/components/nav-dropdown.jsx
+- src/components/mega-menu/components/nav-elements.jsx
+- src/components/mega-menu/components/nav-item.jsx
+- src/components/mega-menu/components/nav-sub-list.jsx
+- src/components/mega-menu/horizontal/index.js
+- src/components/mega-menu/horizontal/mega-menu-horizontal.jsx
+- src/components/mega-menu/horizontal/nav-list.jsx
+- src/components/mega-menu/index.js
+- src/components/mega-menu/mobile/index.js
+- src/components/mega-menu/mobile/mega-menu-mobile.jsx
+- src/components/mega-menu/mobile/nav-list.jsx
+- src/components/mega-menu/styles/classes.js
+- src/components/mega-menu/styles/css-vars.js
+- src/components/mega-menu/styles/index.js
+- src/components/mega-menu/styles/nav-item-styles.js
+- src/components/mega-menu/utils/create-nav-item.js
+- src/components/mega-menu/utils/index.js
+- src/components/mega-menu/vertical/index.js
+- src/components/mega-menu/vertical/mega-menu-vertical.jsx
+- src/components/mega-menu/vertical/nav-list.jsx
+- src/components/nav-basic/components/index.js
+- src/components/nav-basic/components/nav-collapse.jsx
+- src/components/nav-basic/components/nav-dropdown.jsx
+- src/components/nav-basic/components/nav-elements.jsx
+- src/components/nav-basic/desktop/index.js
+- src/components/nav-basic/desktop/nav-basic-desktop.jsx
+- src/components/nav-basic/desktop/nav-item.jsx
+- src/components/nav-basic/desktop/nav-list.jsx
+- src/components/nav-basic/index.js
+- src/components/nav-basic/mobile/index.js
+- src/components/nav-basic/mobile/nav-basic-mobile.jsx
+- src/components/nav-basic/mobile/nav-item.jsx
+- src/components/nav-basic/mobile/nav-list.jsx
+- src/components/nav-basic/styles/classes.js
+- src/components/nav-basic/styles/css-vars.js
+- src/components/nav-basic/styles/index.js
+- src/components/nav-basic/styles/nav-item-styles.js
+- src/components/nav-basic/utils/create-nav-item.js
+- src/components/nav-basic/utils/index.js
+- src/components/nav-section/components/index.js
+- src/components/nav-section/components/nav-collapse.jsx
+- src/components/nav-section/components/nav-dropdown.jsx
+- src/components/nav-section/components/nav-elements.jsx
+- src/components/nav-section/components/nav-subheader.jsx
+- src/components/nav-section/horizontal/index.js
+- src/components/nav-section/horizontal/nav-item.jsx
+- src/components/nav-section/horizontal/nav-list.jsx
+- src/components/nav-section/horizontal/nav-section-horizontal.jsx
+- src/components/nav-section/index.js
+- src/components/nav-section/mini/index.js
+- src/components/nav-section/mini/nav-item.jsx
+- src/components/nav-section/mini/nav-list.jsx
+- src/components/nav-section/mini/nav-section-mini.jsx
+- src/components/nav-section/styles/classes.js
+- src/components/nav-section/styles/css-vars.js
+- src/components/nav-section/styles/index.js
+- src/components/nav-section/styles/nav-item-styles.js
+- src/components/nav-section/utils/create-nav-item.js
+- src/components/nav-section/utils/index.js
+- src/components/nav-section/vertical/index.js
+- src/components/nav-section/vertical/nav-item.jsx
+- src/components/nav-section/vertical/nav-list.jsx
+- src/components/nav-section/vertical/nav-section-vertical.jsx
+- src/components/number-input/index.js
+- src/components/number-input/number-input.jsx
+- src/components/number-input/styles.js
+- src/components/organizational-chart/index.js
+- src/components/organizational-chart/organizational-chart.jsx
+- src/components/phone-input/index.js
+- src/components/phone-input/list-popover.jsx
+- src/components/phone-input/phone-input.jsx
+- src/components/progress-bar/index.js
+- src/components/progress-bar/progress-bar.jsx
+- src/components/progress-bar/styles.css
+- src/components/providers/query-provider.tsx
+- src/components/scrollbar/classes.js
+- src/components/scrollbar/index.js
+- src/components/scrollbar/scrollbar.jsx
+- src/components/scrollbar/styles.css
+- src/components/search-not-found/index.js
+- src/components/search-not-found/search-not-found.jsx
+- src/components/settings/context/index.js
+- src/components/settings/context/settings-context.js
+- src/components/settings/context/settings-provider.jsx
+- src/components/settings/context/use-settings-context.js
+- src/components/settings/drawer/base-option.jsx
+- src/components/settings/drawer/font-options.jsx
+- src/components/settings/drawer/fullscreen-button.jsx
+- src/components/settings/drawer/icons.jsx
+- src/components/settings/drawer/index.js
+- src/components/settings/drawer/nav-layout-option.jsx
+- src/components/settings/drawer/presets-options.jsx
+- src/components/settings/drawer/settings-drawer.jsx
+- src/components/settings/drawer/styles.jsx
+- src/components/settings/index.js
+- src/components/settings/server.js
+- src/components/settings/settings-config.js
+- src/components/snackbar/classes.js
+- src/components/snackbar/index.js
+- src/components/snackbar/snackbar.jsx
+- src/components/snackbar/styles.jsx
+- src/components/svg-color/classes.js
+- src/components/svg-color/index.js
+- src/components/svg-color/svg-color.jsx
+- src/components/table/index.js
+- src/components/table/table-empty-rows.jsx
+- src/components/table/table-head-custom.jsx
+- src/components/table/table-no-data.jsx
+- src/components/table/table-pagination-custom.jsx
+- src/components/table/table-selected-action.jsx
+- src/components/table/table-skeleton.jsx
+- src/components/table/use-table.js
+- src/components/table/utils.js
+- src/components/upload/classes.js
+- src/components/upload/components/placeholder.jsx
+- src/components/upload/components/preview-multi-file.jsx
+- src/components/upload/components/preview-single-file.jsx
+- src/components/upload/components/rejection-files.jsx
+- src/components/upload/index.js
+- src/components/upload/upload-avatar.jsx
+- src/components/upload/upload-box.jsx
+- src/components/upload/upload.jsx
+
+## Routes (src/routes/)
+- src/routes/components/index.js
+- src/routes/components/router-link.jsx
+- src/routes/hooks/index.js
+- src/routes/hooks/use-params.js
+- src/routes/hooks/use-pathname.js
+- src/routes/hooks/use-router.js
+- src/routes/hooks/use-search-params.js
+- src/routes/paths.js
+

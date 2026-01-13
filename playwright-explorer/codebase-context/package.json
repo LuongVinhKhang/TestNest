@@ -1,0 +1,19 @@
+{
+  "name": "codebase-context",
+  "version": "1.0.0",
+  "description": "Scripts to extract and combine FE/BE codebase context for the Playwright AI agent.",
+  "main": "README.md",
+  "scripts": {
+    "extract:fe": "ts-node extract-fe-summary.ts $FE_ROOT fe-summary.md",
+    "extract:be": "ts-node extract-be-summary.ts $BE_ROOT be-summary.md",
+    "combine": "ts-node combine-context.ts ../site-intro.md fe-summary.md be-summary.md ../site-context.md"
+  },
+  "dependencies": {
+    "ts-morph": "^27.0.2",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "typescript": "^5.3.3"
+  }
+}
